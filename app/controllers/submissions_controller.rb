@@ -15,6 +15,7 @@ class SubmissionsController < ApplicationController
 
   def create
     @submission = Submission.new(submission_params)
+    @submission.user_id = current_user.id
 
     if @submission.save
       redirect_to submission_url(@submission), notice: "Submission was successfully created."
@@ -42,6 +43,6 @@ class SubmissionsController < ApplicationController
     end
 
     def submission_params
-      params.require(:submission).permit(:title, :body, :url, :media, :user_id)
+      params.require(:submission).permit(:title, :body, :url, :media)
     end
 end
