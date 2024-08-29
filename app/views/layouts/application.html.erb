@@ -10,15 +10,12 @@
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
   </head>
 
-  <body>
-    <p class='notice'><%= notice %></p>
-    <p class='alert'><%= alert %></p>
-    <% if user_signed_in? %>
-      <%= button_to "Log out", destroy_user_session_path, method: :delete, class: 'underline' %>
-    <% else %>
-      <%= link_to "Log in", new_user_session_path, class: 'underline' %>
-    <% end %>
-    
-    <%= yield %>
+  <body class='bg-gray-200 relative h-screen overflow-x-hidden accent-indigo-600'>
+    <%= render 'shared/navbar' %>
+    <%= render 'shared/flash_msg' if flash.present? %>
+
+    <div class='container mx-auto py-6 px-6'>
+      <%= yield %>
+    </div>
   </body>
 </html>
