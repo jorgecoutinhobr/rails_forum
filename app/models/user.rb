@@ -1,4 +1,8 @@
 class User < ApplicationRecord
+  include PgSearch::Model
+
+  multisearchable against: :username
+
   before_create :add_unsubscribe_hash
 
   devise :database_authenticatable, :registerable,

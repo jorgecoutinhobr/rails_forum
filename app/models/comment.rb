@@ -1,5 +1,9 @@
 class Comment < ApplicationRecord
+  include PgSearch::Model
   include VoteCountable
+
+  multisearchable against: :reply
+
   belongs_to :submission
   belongs_to :user
 
