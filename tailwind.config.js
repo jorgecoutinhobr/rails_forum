@@ -9,8 +9,8 @@ module.exports = {
     extend: {},
   },
   plugins: [
-    "@tailwindcss/typography",
-    "@tailwindcss/forms"
+    require("@tailwindcss/typography"),
+    require("@tailwindcss/forms")
   ],
 }
 
