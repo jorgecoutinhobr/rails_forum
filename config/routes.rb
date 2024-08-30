@@ -1,4 +1,7 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
+  mount Sidekiq::Web => "/sidekiq"
   root 'submissions#index'
 
   resources :communities do
