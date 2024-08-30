@@ -26,11 +26,12 @@
     <% if user_signed_in? %>
       <h3 class="font-bold text-lg mb-3">Welcome, <%= current_user.username %></h3>
       
-
+    <div>
       <%= link_to "Create submission", new_submission_path, class: "btn-small btn-indigo" %>
-
-      <%#= link_to "Create community", new_community_path, class: "text-indigo-600 underline" %>
-
+    </div>
+    <div class="mt-4">
+      <%= link_to "Create community", new_community_path, class: "btn-small btn-outline" %>
+    </div>
     <% else %>
       <%= image_tag "illustration.svg", class: "max-w-full" %>
 

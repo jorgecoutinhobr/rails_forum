@@ -8,9 +8,8 @@
         <div class="flex flex-wrap justify-start w-full lg:w-2/3 flex-1">
 
           <div class="flex flex-wrap items-center lg:flex-1 lg:space-x-6 lg:w-auto w-full">
-            <%
-=begin%>
- <% if @communities.any? %>
+            
+            <% if @communities.any? %>
               <div class="lg:w-1/4 w-full lg:mb-0 mb-3">
 
                 <div data-controller="dropdown" class="rounded bg-white text-gray-700 ml-1 hover:bg-gray-50 relative">
@@ -37,8 +36,6 @@
                 </div>
               </div>
             <% end %> 
-<%
-=end%>
 
             <div class="lg:flex-1 lg:w-auto w-full lg:mb-0 mb-3 relative">
               <div class="relative">

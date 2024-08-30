@@ -15,7 +15,7 @@
 }
 
 .btn-outline {
-  @apply text-gray-800 border border-gray-400 hover:bg-gray-100;
+  @apply text-gray-800 border border-gray-400 hover:bg-indigo-100;
 }
 
 .btn-white {

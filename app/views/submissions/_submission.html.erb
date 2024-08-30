@@ -26,7 +26,7 @@
         <% end %>
       </h3>
       <p class="font-mono text-sm text-gray-600 group hover:text-indigo-600 mb-2">
-        w/<%#= link_to submission.community.name, community_path(submission.community), class: "group-hover:text-indigo-600" %>
+        w/<%= link_to submission.community.name, community_path(submission.community), class: "group-hover:text-indigo-600" %>
       </p>
 
       <% if submission.body? %>
@@ -47,7 +47,7 @@
 =end%>
         </div>
 
-        <%# if author_of?(submission) %>
+        <% if author_of?(submission) %>
           <div class="pt-4 flex flex-wrap items-center space-x-4">
             <%= link_to edit_submission_path(submission), class: "no-underline" do %>
               <%= render_svg "icons/edit", title: "Edit", styles: "fill-current text-gray-400 w-5 h-5 hover:text-indigo-600" %>
@@ -57,7 +57,7 @@
               <%= render_svg "icons/delete", title: "Delete", styles: "fill-current text-gray-400 w-5 h-5 hover:text-indigo-600" %>
             <% end %>
           </div>
-        <%# end %>
+        <% end %>
       </div>
 
     </div>

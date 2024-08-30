@@ -1,10 +1,20 @@
-<p style="color: green"><%= notice %></p>
+<%# title "Submissions" %>
 
-<%= render @community %>
+<% content_for :community_label, "w/#{@community.name}" %>
 
-<div>
-  <%= link_to "Edit this community", edit_community_path(@community) %> |
-  <%= link_to "Back to communities", communities_path %>
+<%#= render "header", community: @community %>
 
-  <%= button_to "Destroy this community", @community, method: :delete %>
-</div>
+<% content_for :primary_content do %>
+  <ul class="divide-y list-none">
+    <% @community.submissions.each_with_index do |submission, index| %>
+      <%#= inject_feed_ad(index) %>
+      <%= render "submissions/submission", submission: submission %>
+    <% end %>
+  </ul>
+<% end %>
+
+<% content_for :secondary_content do %>
+  <%= render "sidebar", community: @community %>
+<% end %>
+
+<%= render "basic_layout" %>
