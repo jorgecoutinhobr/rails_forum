@@ -17,8 +17,8 @@ class CommunitiesController < ApplicationController
   def edit; end
 
   def create
-    @community = current_user.communities.build(community_params)
-
+    @community = current_user.communities.new(community_params)
+    @community.user = current_user
     if @community.save
       redirect_to community_url(@community), notice: "Community was successfully created."
     else
