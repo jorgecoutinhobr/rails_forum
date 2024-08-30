@@ -37,11 +37,7 @@
       <div class="flex items-center space-x-5 mt-6">
         <div class="flex items-center space-x-2 mr-2">
           <%= render_svg "icons/conversation", styles: "w-5 fill-current text-gray-500" %>
-          <%
-=begin%>
- <p id="<%= dom_id(@submission)%>_comment_count"><%= pluralize(@submission.comments.size, 'comment') %></p> 
-<%
-=end%>
+          <p id="<%= dom_id(@submission)%>_comment_count"><%= pluralize(@submission.comments.size, 'comment') %></p> 
         </div>
         <% if author_of?(@submission) %>
           <%= link_to  edit_submission_path(@submission), class: "group" do %>

@@ -92,14 +92,13 @@
 <%
 =end%>
                     <li>
-                      <%
-=begin%>
+                      
+
  <%= link_to profile_path(current_user), class: "hover:bg-indigo-50 hover:text-indigo-600 text-gray-600 no-underline block py-3 px-4 flex items-center group rounded-t" do %>
                         <%= render_svg "icons/user" ,styles: "w-5 h-5 fill-current group-hover:text-indigo-600 text-gray-600 mr-3" %>
                         My profile
                       <% end %> 
-<%
-=end%>
+
                     </li>
                     <li>
                       <%= link_to edit_user_registration_path, class: "hover:bg-indigo-50 hover:text-indigo-600 text-gray-600 no-underline block py-3 px-4 flex items-center group" do %>

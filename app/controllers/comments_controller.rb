@@ -3,9 +3,7 @@ class CommentsController < ApplicationController
   before_action :set_comment, only: [:edit, :update, :destroy, :show]
   before_action :set_submission
 
-  def new
-
-  end
+  def new; end
 
   def create
     @comment = @submission.comments.new(comment_params)
@@ -38,7 +36,10 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment.destroy
-    redirect_to submissions_path(@submission)
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_to submissions_path(@submission) }
+    end
   end
 
   private
