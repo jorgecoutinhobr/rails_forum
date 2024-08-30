@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  before_create :add_unsubscribe_hash
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable
 
@@ -13,4 +15,9 @@ class User < ApplicationRecord
   validates_presence_of :username
 
   acts_as_voter
+
+  private
+    def add_unsubscribe_hash
+      self.unsubscribe_hash = SecureRandom.hex
+    end
 end
