@@ -1,5 +1,6 @@
 class SubmissionsController < ApplicationController
-  before_action :set_submission, only: %i[ show edit update destroy ]
+  include ActionView::RecordIdentifier
+  before_action :set_submission, only: %i[ show edit update destroy upvote downvote ]
   before_action :authenticate_user!, except: %i[ index show ]
   def index
     @submissions = Submission.all
@@ -35,6 +36,30 @@ class SubmissionsController < ApplicationController
   def destroy
     @submission.destroy
     redirect_to submissions_url, notice: "Submission was successfully destroyed."
+  end
+
+  def upvote
+    respond_to do |format|
+      unless current_user.voted_for? @submission
+        @submission.upvote_by current_user
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("#{dom_id(@submission)}_votes_count", @submission.total_vote_count)
+      }
+      else
+         format.html { redirect_back fallback_location: root_path, alert: "You already voted for this submission."}
+      end
+    end
+  end
+
+  def downvote
+    respond_to do |format|
+      unless current_user.voted_for? @submission
+        @submission.downvote_by current_user
+        format.turbo_stream { render turbo_stream: turbo_stream.replace("#{dom_id(@submission)}_votes_count", @submission.total_vote_count)
+      }
+      else
+        format.html { redirect_back fallback_location: root_path, alert: "You already voted for this submission."}
+      end
+    end
   end
 
   private

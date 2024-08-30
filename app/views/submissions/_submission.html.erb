@@ -1,7 +1,7 @@
 <li id="<%= dom_id submission %>">
   <div class="py-3 flex items-start flex-wrap">
 
-    <%#= render "submissions/voting", submission: submission %>
+    <%= render "submissions/voting", submission: submission %>
 
     <% if submission.media.attached? %>
       <div class="w-2/12">
