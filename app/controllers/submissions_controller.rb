@@ -3,7 +3,13 @@ class SubmissionsController < ApplicationController
   before_action :set_submission, only: %i[ show edit update destroy upvote downvote ]
   before_action :authenticate_user!, except: %i[ index show ]
   def index
-    @submissions = Submission.all
+    if user_signed_in?
+      @feed_title = "My Feed"
+      @submissions = current_user.subscribed_submissions
+    else
+      @feed_title = "Select a community"
+      @submissions = Submission.all
+    end
   end
 
   def show

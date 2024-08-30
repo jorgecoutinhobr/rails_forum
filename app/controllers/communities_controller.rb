@@ -6,7 +6,9 @@ class CommunitiesController < ApplicationController
     @communities = Community.all
   end
 
-  def show; end
+  def show
+    @subscription = @community.subscriptions.where(user: current_user).first
+  end
 
   def new
     @community = current_user.communities.build
