@@ -6,7 +6,10 @@ class SubmissionsController < ApplicationController
     @submissions = Submission.all
   end
 
-  def show; end
+  def show
+    @community = @submission.community
+    @subscription = @community.subscriptions.where(user: current_user).first
+  end
 
   def new
     @submission = Submission.new

@@ -5,6 +5,9 @@ class User < ApplicationRecord
   has_many :submissions, dependent: :destroy
   has_many :communities
   has_many :comments, dependent: :destroy
+  has_many :subscriptions
+  has_many :communities, through: :subscriptions
+
 
   validates_uniqueness_of :username
   validates_presence_of :username

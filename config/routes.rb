@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  get 'profiles/show'
   root 'submissions#index'
-  resources :communities
+
+  resources :communities do
+    resources :subscriptions
+  end
 
   resources :submissions do
     member do
@@ -20,6 +22,4 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :profiles, only: [:show]
-
-
 end
