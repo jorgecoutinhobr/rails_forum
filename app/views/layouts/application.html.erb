@@ -11,6 +11,7 @@
   </head>
 
   <body class='bg-gray-200 relative h-screen overflow-x-hidden accent-indigo-600'>
+    <%= render "admin/nav" if params[:controller].include?("admin") %>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flash_msg' if flash.present? %>
 

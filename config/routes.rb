@@ -1,8 +1,14 @@
 require "sidekiq/web"
 
 Rails.application.routes.draw do
-  mount Sidekiq::Web => "/sidekiq"
-  root 'submissions#index'
+  authenticated :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => "/sidekiq"
+    namespace :admin do
+      resources :users
+      resources :submissions
+      root to: "users#index"
+    end
+  end
 
   resources :communities do
     resources :subscriptions
@@ -29,4 +35,6 @@ Rails.application.routes.draw do
   devise_for :users
 
   resources :profiles, only: [:show]
+
+  root 'submissions#index'
 end
