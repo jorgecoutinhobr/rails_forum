@@ -42,7 +42,7 @@ class CommunitiesController < ApplicationController
 
   private
     def set_community
-      @community = Community.find(params[:id])
+      @community = Community.friendly.find(params[:id])
     end
 
     def community_params

@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  extend FriendlyId
   include PgSearch::Model
 
   multisearchable against: :username
@@ -19,6 +20,8 @@ class User < ApplicationRecord
   validates_presence_of :username
 
   acts_as_voter
+
+  friendly_id :username, use: :slugged
 
   private
     def add_unsubscribe_hash

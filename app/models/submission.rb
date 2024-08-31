@@ -1,4 +1,5 @@
 class Submission < ApplicationRecord
+  extend FriendlyId
   include PgSearch::Model
   include VoteCountable
 
@@ -14,4 +15,6 @@ class Submission < ApplicationRecord
   validates :url, url: true, allow_blank: true
 
   acts_as_votable
+
+  friendly_id :title, use: :slugged
 end

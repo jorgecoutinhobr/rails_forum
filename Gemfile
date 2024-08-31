@@ -23,6 +23,7 @@ gem 'acts_as_votable'
 gem "validate_url"
 gem "sidekiq"
 gem 'pg_search'
+gem 'friendly_id', '~> 5.5.0'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]

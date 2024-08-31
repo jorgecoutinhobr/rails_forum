@@ -78,7 +78,7 @@ class SubmissionsController < ApplicationController
 
   private
     def set_submission
-      @submission = Submission.find(params[:id])
+      @submission = Submission.friendly.find(params[:id])
     end
 
     def submission_params
