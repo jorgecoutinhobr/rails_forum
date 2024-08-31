@@ -52,7 +52,9 @@
 
   <% end %>
 
-  <div class="my-6">
+  <%
+=begin%>
+ <div class="my-6">
     <h3 class="mb-2 font-bold text-lg">Webbit Premium</h3>
 
     <% if user_signed_in? && !current_user.subscribed? %>
@@ -61,7 +63,9 @@
       <%= button_to "Manage subscription", billings_path, data: {turbo: false}, class: "text-white bg-gray-600 px-3 py-4 block rounded w-full" %>
     <% end %>
 
-  </div>
+  </div> 
+<%
+=end%>
 
   <hr class="my-6"/>
 
