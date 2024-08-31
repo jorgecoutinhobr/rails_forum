@@ -78,7 +78,7 @@ class CommentsController < ApplicationController
     end
 
     def set_submission
-      @submission = Submission.find(params[:submission_id])
+      @submission = Submission.friendly.find(params[:submission_id])
     end
 
     def set_comment
