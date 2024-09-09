@@ -27,7 +27,10 @@ gem 'friendly_id', '~> 5.5.0'
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  # add by me
   gem "awesome_print"
+  gem "pry-rails"
+  gem "faker"
 end
 
 group :development do
