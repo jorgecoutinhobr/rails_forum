@@ -3,8 +3,11 @@
     <%= render "comments/voting", submission: @submission, comment: comment %>
 
     <div>
-      <p class="font-semibold"><%= comment.user.username %></p>
-      <div class="prose prose-indigo"><%= comment.reply %></div>
+      <div class="flex flex-row gap-1">
+        <div><%= gravatar_for(comment.user, class: 'rounded-full h-5 w-5') %></div>
+        <div><p class="font-semibold"><%= comment.user.username %></p></div>
+      </div>
+      <div class="prose prose-indigo ml-6"><%= comment.reply %></div>
 
       <% if author_of?(comment) %>
         <div class="flex items-end space-x-3">
