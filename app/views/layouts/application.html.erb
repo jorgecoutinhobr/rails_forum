@@ -1,19 +1,20 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>RedditClone</title>
+    <title>Rails Forum</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
+    <%#= javascript_include_tag "application",  "https://js.stripe.com/v3/" %>
   </head>
 
   <body class='bg-gray-200 relative h-screen overflow-x-hidden accent-indigo-600'>
+    <%= render "admin/nav" if params[:controller].include?("admin") %>
     <%= render 'shared/navbar' %>
     <%= render 'shared/flash_msg' if flash.present? %>
-
 
     <%= yield %>
   </body>

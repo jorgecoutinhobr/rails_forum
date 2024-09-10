@@ -1,7 +1,7 @@
 class SubmissionsController < ApplicationController
   include ActionView::RecordIdentifier
   before_action :set_submission, only: %i[ show edit update destroy upvote downvote ]
-  before_action :authenticate_user!, except: %i[ index show ]
+  before_action :authenticate_user!, except: %i[ index show unsubscribe ]
   def index
     if user_signed_in?
       @feed_title = "My Feed"
@@ -71,12 +71,17 @@ class SubmissionsController < ApplicationController
     end
   end
 
+  def unsubscribe
+    user = User.find_by_unsubscribe_hash(params[:unsubscribe_hash])
+    user.update(comment_subscription: false)
+  end
+
   private
     def set_submission
-      @submission = Submission.find(params[:id])
+      @submission = Submission.friendly.find(params[:id])
     end
 
     def submission_params
-      params.require(:submission).permit(:title, :body, :url, :media, :community_id)
+      params.require(:submission).permit(:title, :body, :url, :media, :community_id, :video_url)
     end
 end

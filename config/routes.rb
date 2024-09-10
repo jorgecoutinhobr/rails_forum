@@ -1,5 +1,14 @@
+require "sidekiq/web"
+
 Rails.application.routes.draw do
-  root 'submissions#index'
+  authenticated :user, lambda { |u| u.admin? } do
+    mount Sidekiq::Web => "/sidekiq"
+    namespace :admin do
+      resources :users
+      resources :submissions
+      root to: "users#index"
+    end
+  end
 
   resources :communities do
     resources :subscriptions
@@ -19,7 +28,18 @@ Rails.application.routes.draw do
     end
   end
 
+  get "submissions/unsubscribe/:unsubscribe_hash" => "submissions#unsubscribe", as: :comment_unsubscribe
+
+  get :search, controller: :application
+
   devise_for :users
 
   resources :profiles, only: [:show]
+
+  resource :pricing
+  resources :checkouts
+  resources :premium_subscriptions
+  get "success", to: "checkouts#success"
+  resources :webhooks, only: [:create]
+  root 'submissions#index'
 end

@@ -34,11 +34,8 @@
     <p class="text-gray-600">Joined <%= @profile.created_at.to_formatted_s(:nice) %></p>
 
     <div class="mt-6">
-      <% if user_signed_in? %>
+      <% if user_signed_in? && @profile.email == current_user.email %>
         <%= link_to "New submission", new_submission_path, class: "btn btn-indigo block w-full" %>
-      <% else %>
-        <%= link_to "Login", new_user_session_path, class: "btn btn-outline block w-full mb-4" %>
-        <%= link_to "Sign up", new_user_registration_path, class: "btn btn-indigo block w-full" %>
       <% end %>
     </div>
   </div>

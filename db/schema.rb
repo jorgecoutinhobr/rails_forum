@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_30_180421) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_09_232442) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,8 +60,44 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_30_180421) do
     t.bigint "user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
     t.index ["name"], name: "index_communities_on_name", unique: true
+    t.index ["slug"], name: "index_communities_on_slug", unique: true
     t.index ["user_id"], name: "index_communities_on_user_id"
+  end
+
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "pg_search_documents", force: :cascade do |t|
+    t.text "content"
+    t.string "searchable_type"
+    t.bigint "searchable_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
+  end
+
+  create_table "premium_subscriptions", force: :cascade do |t|
+    t.string "plan"
+    t.string "customer_id"
+    t.string "subscription_id"
+    t.string "status"
+    t.string "interval"
+    t.datetime "current_period_end"
+    t.datetime "current_period_start"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_premium_subscriptions_on_user_id"
   end
 
   create_table "submissions", force: :cascade do |t|
@@ -72,7 +108,10 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_30_180421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "community_id", null: false
+    t.string "slug"
+    t.string "video_url"
     t.index ["community_id"], name: "index_submissions_on_community_id"
+    t.index ["slug"], name: "index_submissions_on_slug", unique: true
     t.index ["user_id"], name: "index_submissions_on_user_id"
   end
 
@@ -94,8 +133,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_30_180421) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "username"
+    t.string "unsubscribe_hash"
+    t.boolean "comment_subscription"
+    t.boolean "admin", default: false
+    t.string "slug"
+    t.string "stripe_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+    t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["username"], name: "index_users_on_username", unique: true
   end
 
@@ -120,6 +165,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_30_180421) do
   add_foreign_key "comments", "submissions"
   add_foreign_key "comments", "users"
   add_foreign_key "communities", "users"
+  add_foreign_key "premium_subscriptions", "users"
   add_foreign_key "submissions", "communities"
   add_foreign_key "submissions", "users"
   add_foreign_key "subscriptions", "communities"

@@ -21,14 +21,24 @@ gem "image_processing", "~> 1.2"
 gem 'inline_svg'
 gem 'acts_as_votable'
 gem "validate_url"
+gem "sidekiq"
+gem 'pg_search'
+gem 'friendly_id', '~> 5.5.0'
+gem 'stripe'
+
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
+  # add by me
   gem "awesome_print"
+  gem "pry-rails"
+  gem "faker"
+  gem 'dotenv'
 end
 
 group :development do
   gem "web-console"
+  gem "letter_opener"
 end
 
 group :test do

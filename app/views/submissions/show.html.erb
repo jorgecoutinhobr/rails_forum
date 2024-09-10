@@ -19,6 +19,12 @@
         <% end %>
       <% end %>
 
+      <% if @submission.video_url.present? %>
+        <div class="video-container mb-2 mt-2">
+          <iframe width="560" height="315" src="<%= @submission.embedded_video %>" frameborder="0" allowfullscreen></iframe>
+        </div>
+      <% end %>
+
       <% if @submission.body? %>
         <div class="prose prose-lg prose-indigo">
           <%= simple_format @submission.body %>
