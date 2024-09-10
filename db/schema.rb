@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_31_012410) do
+ActiveRecord::Schema[7.0].define(version: 2024_09_09_232442) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -86,6 +86,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_31_012410) do
     t.index ["searchable_type", "searchable_id"], name: "index_pg_search_documents_on_searchable"
   end
 
+  create_table "premium_subscriptions", force: :cascade do |t|
+    t.string "plan"
+    t.string "customer_id"
+    t.string "subscription_id"
+    t.string "status"
+    t.string "interval"
+    t.datetime "current_period_end"
+    t.datetime "current_period_start"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_premium_subscriptions_on_user_id"
+  end
+
   create_table "submissions", force: :cascade do |t|
     t.string "title"
     t.text "body"
@@ -123,6 +137,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_31_012410) do
     t.boolean "comment_subscription"
     t.boolean "admin", default: false
     t.string "slug"
+    t.string "stripe_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
@@ -150,6 +165,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_31_012410) do
   add_foreign_key "comments", "submissions"
   add_foreign_key "comments", "users"
   add_foreign_key "communities", "users"
+  add_foreign_key "premium_subscriptions", "users"
   add_foreign_key "submissions", "communities"
   add_foreign_key "submissions", "users"
   add_foreign_key "subscriptions", "communities"

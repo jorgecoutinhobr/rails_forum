@@ -24,6 +24,8 @@ gem "validate_url"
 gem "sidekiq"
 gem 'pg_search'
 gem 'friendly_id', '~> 5.5.0'
+gem 'stripe'
+
 
 group :development, :test do
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -31,6 +33,7 @@ group :development, :test do
   gem "awesome_print"
   gem "pry-rails"
   gem "faker"
+  gem 'dotenv'
 end
 
 group :development do
