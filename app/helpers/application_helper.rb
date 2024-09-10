@@ -1,4 +1,6 @@
 module ApplicationHelper
+  include Pagy::Frontend
+
   def render_svg(name, options = {})
     options[:title] ||= name.underscore.humanize
     options[:aria] = true

@@ -5,7 +5,7 @@ class SubmissionsController < ApplicationController
   def index
     if user_signed_in?
       @feed_title = "My Feed"
-      @submissions = current_user.subscribed_submissions
+      @pagy, @submissions = pagy(current_user.subscribed_submissions, items: 15)
     else
       @feed_title = "Select a community"
       @submissions = Submission.all

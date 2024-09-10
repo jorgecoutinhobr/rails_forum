@@ -7,8 +7,10 @@
         <% @submissions.each_with_index do |submission, index| %>
           <%= inject_feed_ad(index) %>
           <%= render submission %>
+          <hr/>
         <% end %>
       </ul>
+      <%== pagy_nav(@pagy) if @pagy.pages > 1%>
     </div>
   <% else %>
     <div class="p-10 text-center">
